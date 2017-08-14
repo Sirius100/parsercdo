@@ -12,6 +12,7 @@ from selenium.common.exceptions import WebDriverException
 class Config_firefox_start():# параметр в __init__ передавать в виде 'google.ru' без 'http://www.'
     """
     Настройка параметров запускаемого  экземпляра Firefox
+    добавить возможность пользователю выбор порта для прокси Firefox
     """
     
     def __init__(self,link_url): # link_url при создании обЪекта передаю нужный адрес сайта
