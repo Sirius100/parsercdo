@@ -31,7 +31,7 @@ class Config_firefox_start():# параметр в __init__ передавать
         self.profile = webdriver.FirefoxProfile()
         self.profile.set_preference("network.proxy.type", 1)
         self.profile.set_preference("network.proxy.http", "localhost")
-        self.profile.set_preference("network.proxy.http_port", default_port_firefox) # Firefox пойдет в сеть через 8081-й порт 
+        self.profile.set_preference("network.proxy.http_port", default_port_firefox) # Firefox пойдет в сеть через  порт default_port_firefox
         self.profile.set_proxy(self.proxy_my)
 
         """Запуск браузера с настроенными настройками(prifile)и переход на сайт"""
