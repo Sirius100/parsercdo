@@ -14,11 +14,11 @@ class Config_firefox_start():# параметр в __init__ передавать
     Настройка параметров запускаемого  экземпляра Firefox
     """
     
-    def __init__(self,link_url): # link_url при создании обЪекта передаю нужный адрес сайта
+    def __init__(self,link_url,default_port_firefox = 8080): # link_url при создании обЪекта передаю нужный адрес сайта,default_port_firefox - порт браузера
         self.url      = 'http://%s' % (link_url) # link_url хранит адрес сайта который нужен для перехода
 
         """ настройка вкладки "Сеть" запускаемого браузера"""
-        self.myProxy  = "localhost:8081" # Экземпляр объекта Config_firefox_start() запустится на указанном прокси , в данном случае на 8081-м порту 
+        self.myProxy  = "localhost:%s" % (default_port_firefox) # Экземпляр объекта Config_firefox_start() запустится на указанном прокси , в данном случае на 8080-м порту 
         self.proxy_my = Proxy({
         'proxyType'   : ProxyType.MANUAL,
         'httpProxy'   : self.myProxy,
@@ -31,11 +31,13 @@ class Config_firefox_start():# параметр в __init__ передавать
         self.profile = webdriver.FirefoxProfile()
         self.profile.set_preference("network.proxy.type", 1)
         self.profile.set_preference("network.proxy.http", "localhost")
-        self.profile.set_preference("network.proxy.http_port", 8081) # Firefox пойдет в сеть через 8081-й порт 
+        self.profile.set_preference("network.proxy.http_port", default_port_firefox) # Firefox пойдет в сеть через 8081-й порт 
         self.profile.set_proxy(self.proxy_my)
 
         """Запуск браузера с настроенными настройками(prifile)и переход на сайт"""
         self.driver = webdriver.Firefox(self.profile)
         self.driver.get(self.url)
 
+    def firefox_stop(self):
+        self.driver.close()
 #==================================================================================
